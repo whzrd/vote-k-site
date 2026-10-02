@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kieran Fogarty | Powell River City Council 2026 - V2.9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb; /* Lighter, vibrant blue */
+            --primary-dark: #1d4ed8;
+            --accent: #dc2626;  
+            --text-dark: #1f2937;
+            --text-light: #f9fafb;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --radius-lg: 30px;
+            --radius-md: 16px;
+            --blueprint-grid: rgba(37, 99, 235, 0.06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            background-color: var(--white);
+            background-image: linear-gradient(var(--blueprint-grid) 1px, transparent 1px), 
+                              linear-gradient(90deg, var(--blueprint-grid) 1px, transparent 1px);
+            background-size: 40px 40px;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 800; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* --- COLOR STREAM ANIMATION --- */
+        .color-stream {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: float-stream 10s linear infinite;
+        }
+
+        @keyframes float-stream {
+            0% { transform: translateX(-20px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100vw); opacity: 0; }
+        }
+
+        /* --- HEADER BANNER STRIP (ABOVE PROFILE PIC - 20% LARGER) --- */
+        .header-banner-strip-wrapper {
+            background-color: var(--primary);
+            padding: 25px 0 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-banner-strip-wrapper .banner-strip img {
+            height: 97px; /* 20% larger than 81px */
+            width: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 20px 20px 40px;
+            background-color: var(--primary);
+            color: var(--white);
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* --- ROUNDED CORNER PROFILE FRAME --- */
+        .headshot {
+            width: 200px;
+            height: 200px;
+            border-radius: 24px;
+            border: 5px solid var(--white);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            object-fit: cover;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 1;
+            color: var(--white);
+            text-shadow: 
+                -2px -2px 0 #000,  
+                 2px -2px 0 #000,
+                -2px  2px 0 #000,
+                 2px  2px 0 #000,
+                 0px 4px 10px rgba(0,0,0,0.4);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 600;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+
+        /* --- FLIP BOARD COUNTDOWN --- */
+        .flip-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .flip-card {
+            background: #1e293b;
+            color: white;
+            width: 70px;
+            height: 100px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-bottom: 4px solid #0f172a;
+        }
+
+        .flip-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0,0,0,0.5);
+            z-index: 5;
+        }
+
+        .countdown-label {
+            display: block;
+            margin-top: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fde047;
+        }
+
+        /* --- TRANSITION BANNER STRIP (BELOW HERO) --- */
+        .top-banner-strip-wrapper {
+            background-color: var(--primary);
+            padding: 10px 0 25px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .top-banner-strip-wrapper .banner-strip img {
+            height: 81px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* --- FULL-BLEED UNBORDERED BANNER SHOWCASE STRIP (BOTTOM) --- */
+        .banner-strip-wrapper {
+            position: relative;
+            left: 50%;
+            right: 50%;
+            width: 100vw;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-bottom: 60px;
+            padding: 15px 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            border: none;
+            background: transparent;
+        }
+
+        .banner-strip {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            flex-shrink: 0;
+        }
+
+        .banner-strip img {
+            height: 65px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            flex-shrink: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* --- TIMELINE BRIDGE --- */
+        .timeline-bridge {
+            background: var(--bg-light);
+            padding: 60px 20px;
+            text-align: center;
+            border-top-left-radius: var(--radius-lg);
+            border-top-right-radius: var(--radius-lg);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+            margin-top: -20px; 
+            position: relative;
+            z-index: 10;
+            border: 1px dashed var(--primary);
+            border-bottom: none;
+        }
+
+        .timeline-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .timeline-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 3px solid var(--primary);
+            min-width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .timeline-item.active {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .timeline-item .date {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        /* --- DETAILED ACCENTS --- */
+        .detail-line {
+            height: 1px;
+            background: var(--primary);
+            width: 100%;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .detail-line::after {
+            content: 'X';
+            position: absolute;
+            left: 50%;
+            top: -6px;
+            background: var(--white);
+            padding: 0 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--primary);
+        }
+
+        .dashed-border {
+            border: 1px dashed var(--primary) !important;
+        }
+
+        /* --- MAIN LAYOUT --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 30px;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .section-block { margin-bottom: 100px; }
+
+        .about-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .about-photo-container {
+            flex: 0 0 260px;
+            text-align: center;
+        }
+
+        .about-photo {
+            width: 100%;
+            max-width: 260px;
+            height: auto;
+            border-radius: 20px;
+            border: 4px solid var(--primary);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            object-fit: cover;
+        }
+
+        .intro-text {
+            font-size: 1.25rem;
+            color: #4b5563;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .legacy-box {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            margin-top: 30px;
+            border-left: 8px solid var(--primary);
+            border-right: 1px dashed var(--primary);
+            border-bottom: 1px dashed var(--primary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            border-top: 2px solid var(--primary);
+            border-right: 2px solid var(--primary);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .quote-section {
+            text-align: center;
+            background: var(--primary);
+            color: var(--white);
+            padding: 80px 40px;
+            border-radius: var(--radius-lg);
+            margin: 60px 0;
+            border: 4px double var(--white);
+        }
+
+        .quote-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .voting-guide {
+            background: #eff6ff;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            border: 2px dashed var(--primary);
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .voting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .guide-col h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .guide-list { list-style: none; padding: 0; }
+        .guide-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            border-bottom: 1px dotted #bfdbfe;
+        }
+
+        .guide-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* --- CONTACT CARD STYLING --- */
+        .contact-card {
+            background: var(--white);
+            border: 2px dashed var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .contact-name {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            font-size: 1.15rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .contact-label {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .contact-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 100px 20px;
+            background: var(--bg-light);
+            border-radius: var(--radius-lg);
+            margin-top: 60px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 20px 45px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            border-radius: var(--radius-md);
+            margin-top: 30px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 0 #991b1b;
+        }
+
+        .cta-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #991b1b;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 0.95rem;
+            color: #9ca3af;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* --- MOBILE RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 768px) {
+            .header-banner-strip-wrapper { padding: 15px 0 5px; }
+            .header-banner-strip-wrapper .banner-strip img { height: 60px; }
+            
+            .hero { padding: 15px 15px 25px; }
+            .hero .headshot { display: none; } /* Removed top profile picture on mobile */
+            .hero h1 { font-size: 2.3rem; margin: 5px 0 10px; }
+            .hero p { font-size: 1.15rem; margin-bottom: 15px; }
+            
+            .flip-container { gap: 8px; margin-top: 15px; }
+            .flip-card { width: 50px; height: 75px; font-size: 1.8rem; }
+            
+            .top-banner-strip-wrapper { padding: 5px 0 15px; }
+            .top-banner-strip-wrapper .banner-strip img { height: 50px; }
+            
+            .timeline-bridge { padding: 40px 15px; }
+            .container { padding: 40px 20px; }
+            .quote-title { font-size: 1.3rem; }
+            .about-layout { flex-direction: column; align-items: center; }
+            .banner-strip img { height: 45px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="color-stream" id="colorStream"></div>
+
+    <!-- TOP ROW BANNER STRIP (ABOVE HERO) -->
+    <div class="header-banner-strip-wrapper">
+        <div class="banner-strip">
+            <img src="images/Banner-For-Kieran-Red2.png" alt="Banner 2">
+            <img src="images/Banner-For-Kieran-Red3.png" alt="Banner 3">
+            <img src="images/Banner-For-Kieran-Red4.png" alt="Banner 4">
+            <img src="images/Banner-For-Kieran-Red5.png" alt="Banner 5">
+            <img src="images/Banner-For-Kieran-Red6.png" alt="Banner 6">
+            <img src="images/Banner-For-Kieran-Red7.png" alt="Banner 7">
+            <img src="images/Banner-For-Kieran-Red8.png" alt="Banner 8">
+            <img src="images/Banner-For-Kieran-Red9.png" alt="Banner 9">
+            <img src="images/Banner-For-Kieran-Red11.png" alt="Banner 11">
+            <img src="images/Banner-For-Kieran-Red12.png" alt="Banner 12">
+            <img src="images/Banner-For-Kieran-Red14.png" alt="Banner 14">
+            <img src="images/Banner-For-Kieran-Red16.png" alt="Banner 16">
+        </div>
+    </div>
+
+    <!-- TOP HERO SECTION -->
+    <section class="hero" id="heroSection">
+        <img src="K-profile-01.png" alt="Kieran Fogarty" class="headshot">
+        <h1 id="mainName">Kieran Fogarty</h1>
+        <p>Active Leadership for the City of Powell River</p>
+        
+        <div class="flip-container" id="flipBoard"></div>
+        <div class="countdown-label" id="countdownLabel">Loading...</div>
+    </section>
+
+    <!-- TRANSITION BANNER STRIP (BELOW HERO) -->
+    <div class="top-banner-strip-wrapper">
+        <div class="banner-strip">
+            <img src="images/Banner-For-Kieran-Red2.png" alt="Banner 2">
+            <img src="images/Banner-For-Kieran-Red3.png" alt="Banner 3">
+            <img src="images/Banner-For-Kieran-Red4.png" alt="Banner 4">
+            <img src="images/Banner-For-Kieran-Red5.png" alt="Banner 5">
+            <img src="images/Banner-For-Kieran-Red6.png" alt="Banner 6">
+            <img src="images/Banner-For-Kieran-Red7.png" alt="Banner 7">
+            <img src="images/Banner-For-Kieran-Red8.png" alt="Banner 8">
+            <img src="images/Banner-For-Kieran-Red9.png" alt="Banner 9">
+            <img src="images/Banner-For-Kieran-Red11.png" alt="Banner 11">
+            <img src="images/Banner-For-Kieran-Red12.png" alt="Banner 12">
+            <img src="images/Banner-For-Kieran-Red14.png" alt="Banner 14">
+            <img src="images/Banner-For-Kieran-Red16.png" alt="Banner 16">
+        </div>
+    </div>
+
+    <div class="update-notice" style="text-align: center; padding: 15px; background: white; color: #6b7280; font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid #e5e7eb;">
+        <strong>Please note that this website will continue to be updated throughout the election process. Last update occurred September 25, 2026.</strong>
+    </div>
+
+    <div class="timeline-bridge">
+        <div class="timeline-container">
+            <div class="timeline-item" id="vote-1">
+                <span class="date">Oct 7</span>
+                1st Advance Voting
+            </div>
+            <div class="timeline-item" id="vote-2">
+                <span class="date">Oct 10</span>
+                2nd Advance Voting
+            </div>
+            <div class="timeline-item" id="vote-3">
+                <span class="date">Oct 14</span>
+                3rd Advance Voting
+            </div>
+            <div class="timeline-item active" id="vote-4">
+                <span class="date">Oct 17</span>
+                General Voting Day
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="section-block">
+            <div class="detail-line"></div>
+            <h2>About Kieran</h2>
+            <div class="about-layout">
+                <div class="about-photo-container">
+                    <img src="K-profile-01.png" alt="Kieran Fogarty" class="about-photo">
+                </div>
+                <div class="intro-text">
+                    <p>Most people blame City Hall when things break. To fix it, we have to understand the machine. Council does not run the city day to day, their job is to steer it. They set the destination and protect the community.</p>
+                    <p>Born and raised in Powell River, I have spent over 20 years leading large teams and building complex systems in the private sector. I will use my position to move the council from consultant-led governance to professional coordination. I know where the levers of power are, and I know how to pull them to get results.</p>
+                    
+                    <div class="legacy-box">
+                        <strong class="mono">ROOTED IN COMMUNITY:</strong> My family has helped shape this town for generations. From my grandparents, Finola (architect of Ocean View School and the museum) and Billy (a veteran), to my father Fred, a lifelong logger, and my mother Jayne, a dance instructor with the National School of Ballet and an avid gardener. With a brother who continues to shape our town's visual identity as a local muralist, my roots here are deep. I am committed to preserving that legacy by ensuring our city's future is viable.
+                    </div>
+                </div>
+            </div>
+            <div class="detail-line"></div>
+        </section>
+
+        <section class="section-block">
+            <h2>The Mill Site</h2>
+            <div class="intro-text">
+                <p>The mill site is a huge part of our future, but the City does not have enough power to protect it. I will take direct action on three fronts:</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li class="mono" style="margin-bottom: 10px; color: var(--primary);"><strong>1. REPEAL ARTICLE 21:</strong> I will ask the Province to repeal the rule that limits City jurisdiction over the mill site's environmental impacts. We must protect our land and water.</li>
+                    <li class="mono" style="margin-bottom: 10px; color: var(--primary);"><strong>2. DATA CENTER MORATORIUM:</strong> No new data centers until independent assessments on water, electricity, and neighborhoods are made public.</li>
+                    <li class="mono" style="margin-bottom: 10px; color: var(--primary);"><strong>3. PUBLIC CONTROL:</strong> I will use town halls and surveys to ensure residents, not outside interests, influence these decisions.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2>Core Priorities</h2>
+            <div class="grid">
+                <div class="card dashed-border">
+                    <h3>The Flex-Hub</h3>
+                    <p>A consolidated facility for recreation, maker spaces, and emergency shelter. We will use lifecycle costing to avoid grant traps and keep our footprint small.</p>
+                </div>
+                <div class="card dashed-border">
+                    <h3>Permanent Housing</h3>
+                    <p>Move from emergency shelters to permanent homes. I support using city land for non-market housing and direct funding for co-ops and non-profits.</p>
+                </div>
+                <div class="card dashed-border">
+                    <h3>Local Economy</h3>
+                    <p>The city should prefer local providers and become a certified Living Wage Employer. I prioritize Social Return on Investment over expensive consultant reports.</p>
+                </div>
+                <div class="card dashed-border">
+                    <h3>Shared Resources</h3>
+                    <p>Moving beyond simple compromise to a Shared Resource approach with the Tla'amin Nation. This creates win-wins for all residents.</p>
+                </div>
+                <div class="card dashed-border">
+                    <h3>Vision for Youth</h3>
+                    <p>A livable city for young people. That means projects that actually get finished and systems that are coordinated and work together.</p>
+                </div>
+                <div class="card dashed-border">
+                    <h3>Climate and Water</h3>
+                    <p>Cut city emissions and safeguard our water quality. I support grants for local carbon-reduction projects in collaboration with the RD and Tla'amin Nation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="quote-section">
+            <div class="quote-title">A Name Change Takes Generations of Understanding</div>
+            <div class="quote-text">
+                "History is a line. A name existed here before Powell River, and Powell River remains the name for its specific era. Adding a new name doesn't erase the old one; it simply records the change and preserves the history of both."
+            </div>
+        </section>
+
+        <section class="voting-guide">
+            <h2>Voting Guide</h2>
+            <p class="mono">GENERAL VOTING DAY: Saturday, October 17, 2026 | 8:00 am to 8:00 pm</p>
+            <div class="voting-grid">
+                <div class="guide-col">
+                    <h3>General Voting Locations</h3>
+                    <ul class="guide-list">
+                        <li>Council Chambers (6910 Duncan Street)</li>
+                        <li>Westview Elementary (3900 Selkirk Avenue)</li>
+                        <li>Cranberry Seniors Centre (6792 Cranberry Street)</li>
+                        <li>James Thomson Elementary (6388 Sutherland Ave)</li>
+                    </ul>
+                </div>
+                <div class="guide-col">
+                    <h3>Advance Voting</h3>
+                    <p class="mono">LOCATION: City Hall Council Chambers (8:00 am to 8:00 pm)</p>
+                    <ul class="guide-list">
+                        <li>Wednesday, October 7</li>
+                        <li>Saturday, October 10</li>
+                        <li>Wednesday, October 14</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- FULL-BLEED UNBORDERED BANNER SHOWCASE STRIP (BOTTOM) -->
+        <div class="banner-strip-wrapper">
+            <div class="banner-strip">
+                <img src="images/Banner-For-Kieran-Red2.png" alt="Banner 2">
+                <img src="images/Banner-For-Kieran-Red3.png" alt="Banner 3">
+                <img src="images/Banner-For-Kieran-Red4.png" alt="Banner 4">
+                <img src="images/Banner-For-Kieran-Red5.png" alt="Banner 5">
+                <img src="images/Banner-For-Kieran-Red6.png" alt="Banner 6">
+                <img src="images/Banner-For-Kieran-Red7.png" alt="Banner 7">
+                <img src="images/Banner-For-Kieran-Red8.png" alt="Banner 8">
+                <img src="images/Banner-For-Kieran-Red9.png" alt="Banner 9">
+                <img src="images/Banner-For-Kieran-Red11.png" alt="Banner 11">
+                <img src="images/Banner-For-Kieran-Red12.png" alt="Banner 12">
+                <img src="images/Banner-For-Kieran-Red14.png" alt="Banner 14">
+                <img src="images/Banner-For-Kieran-Red16.png" alt="Banner 16">
+            </div>
+        </div>
+
+        <!-- GET IN CONTACT SECTION -->
+        <section class="section-block" id="contact">
+            <h2>Get in Contact</h2>
+            <div class="contact-card">
+                <h3 class="contact-name">Kieran Fogarty</h3>
+                <div class="contact-details mono">
+                    <div class="contact-item">
+                        <span class="contact-label">Phone:</span>
+                        <a href="tel:1-604-414-8544" class="contact-link">1-604-414-8544</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Email:</span>
+                        <a href="mailto:Kieraninteractive@gmail.com" class="contact-link">Kieraninteractive@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Website:</span>
+                        <a href="https://kfogarty.earthline.earth" target="_blank" rel="noopener" class="contact-link">kfogarty.earthline.earth</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready for a Change?</h2>
+            <p>Focused on competence, fiscal integrity, and a livable future for our youth.</p>
+            <a href="#contact" class="cta-button">Vote Kieran Fogarty</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Kieran Fogarty for City Council. Authorized by Financial Agent Elisabeth Wik, 1-604-414-8544</p>
+    </footer>
+
+    <script>
+        // Stream Animation
+        const stream = document.getElementById('colorStream');
+        function createCircle() {
+            const circle = document.createElement('div');
+            circle.className = 'circle';
+            const randomHue = Math.floor(Math.random() * 360);
+            circle.style.backgroundColor = `hsl(${randomHue}, 80%, 60%)`;
+            circle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            circle.style.animationDelay = Math.random() * 5 + 's';
+            stream.appendChild(circle);
+            setTimeout(() => circle.remove(), 10000);
+        }
+        setInterval(createCircle, 600);
+
+        // Voting Countdown
+        const targetDates = [
+            { date: new Date('October 7, 2026 00:00:00'), label: 'UNTIL 1ST ADVANCE VOTING' },
+            { date: new Date('October 10, 2026 00:00:00'), label: 'UNTIL 2ND ADVANCE VOTING' },
+            { date: new Date('October 14, 2026 00:00:00'), label: 'UNTIL 3RD ADVANCE VOTING' },
+            { date: new Date('October 17, 2026 00:00:00'), label: 'UNTIL GENERAL ELECTION' }
+        ];
+
+        function updateFlipBoard() {
+            const now = new Date().getTime();
+            let activeTarget = targetDates.find(t => t.date.getTime() > now);
+
+            if (!activeTarget) {
+                document.getElementById('flipBoard').innerHTML = '<div class="flip-card">DONE</div>';
+                document.getElementById('countdownLabel').innerHTML = "VOTING HAS CONCLUDED";
+                return;
+            }
+
+            const distance = activeTarget.date.getTime() - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const timeData = [
+                { val: days, label: 'DAYS' },
+                { val: hours, label: 'HRS' },
+                { val: mins, label: 'MIN' },
+                { val: secs, label: 'SEC' }
+            ];
+
+            document.getElementById('flipBoard').innerHTML = timeData.map(item => `
+                <div style="text-align:center">
+                    <div class="flip-card">${String(item.val).padStart(2, '0')}</div>
+                    <div class="countdown-label" style="font-size:0.7rem">${item.label}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('countdownLabel').innerHTML = activeTarget.label;
+        }
+
+        setInterval(updateFlipBoard, 1000);
+        updateFlipBoard();
+    </script>
+</body>
+</html>
